@@ -15,4 +15,6 @@ public interface AppointmentRepository extends JpaRepository<AppointmentDTO, Lon
     // Método para obtener todas las citas de un doctor por su ID
     List<AppointmentDTO> findByDoctorId(Long doctorId);
 
+
+
 }

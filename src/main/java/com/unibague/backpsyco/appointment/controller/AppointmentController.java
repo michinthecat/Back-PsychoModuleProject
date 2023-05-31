@@ -2,6 +2,7 @@ package com.unibague.backpsyco.appointment.controller;
 
 import com.unibague.backpsyco.appointment.model.AppointmentDTO;
 import com.unibague.backpsyco.appointment.service.implementation.AppointmentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -56,4 +57,12 @@ public class AppointmentController {
     public List<AppointmentDTO> getAllAppointments() {
         return appointmentService.getAllAppointments();
     }
+
+    @GetMapping("/{appointmentId}/status")
+    public ResponseEntity<String> updateAppointmentStatus(@PathVariable Long appointmentId,
+                                                          @RequestParam String newStatus) {
+        appointmentService.updateAppointmentStatus(appointmentId, newStatus);
+        return ResponseEntity.ok("Estado de la reserva actualizado correctamente");
+    }
+
 }

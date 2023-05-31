@@ -12,6 +12,7 @@ public class AppointmentImp implements AppointmentService {
 
     private final AppointmentRepository appointmentRepository;
 
+
     public AppointmentImp(AppointmentRepository appointmentRepository) {
         this.appointmentRepository = appointmentRepository;
     }
@@ -55,4 +56,16 @@ public class AppointmentImp implements AppointmentService {
     public List<AppointmentDTO> getAllAppointments() {
         return appointmentRepository.findAll();
     }
+
+    @Override
+    public void updateAppointmentStatus(Long appointmentId, String newStatus) {
+        AppointmentDTO appointment = appointmentRepository.findById(appointmentId).orElse(null);
+
+        if (appointment != null) {
+            appointment.setAppointmentStatus(newStatus);
+            appointmentRepository.save(appointment);
+        }
+    }
+
+
 }

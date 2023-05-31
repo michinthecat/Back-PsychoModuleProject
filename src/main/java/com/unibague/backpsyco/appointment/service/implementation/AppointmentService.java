@@ -20,4 +20,7 @@ public interface AppointmentService {
       void cancelAppointment(Long appointmentId);
 
       List<AppointmentDTO> getAllAppointments();
+
+      void updateAppointmentStatus(Long appointmentId, String newStatus);
+
 }
