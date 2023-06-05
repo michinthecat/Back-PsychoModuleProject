@@ -18,6 +18,4 @@ public class SemesterData {
     @Column(name = "semester", nullable = false)
     private String semester;
 
-    @OneToMany(mappedBy = "semester")
-    private Set<ProgramPatientData> programPatients;
 }

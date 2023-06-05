@@ -17,6 +17,4 @@ public class ProgramData {
     @Column(name = "program", nullable = false)
     private String program;
 
-    @OneToMany(mappedBy = "program")
-    private Set<ProgramPatientData> programPatients;
 }

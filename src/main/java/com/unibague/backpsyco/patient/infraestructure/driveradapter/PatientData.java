@@ -42,11 +42,5 @@ public class PatientData {
     @JoinColumn(name = "genderid", nullable = false)
     private GenderData gender;
 
-    @OneToMany(mappedBy = "patient")
-    private Set<AppointmentData> appointments;
-
-    @OneToMany(mappedBy = "patient")
-    private Set<ProgramPatientData> programPatients;
-
 
 }

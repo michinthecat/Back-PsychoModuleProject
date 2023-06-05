@@ -19,6 +19,4 @@ public class GenderData {
     @Column(name = "gender", nullable = false)
     private String gender;
 
-    @OneToMany(mappedBy = "gender")
-    private Set<PatientData> patients;
 }
