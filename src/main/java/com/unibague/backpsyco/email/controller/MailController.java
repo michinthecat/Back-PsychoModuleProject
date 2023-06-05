@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/email")
+@RequestMapping("/email")
 public class MailController {
 
 
@@ -31,6 +31,17 @@ public class MailController {
 
         return "Html email sent successfully";
     }
+
+    @PostMapping("/sendConfirmation")
+    public String sendConfirmationEmail(@RequestBody EmailRequest emailRequest) {
+        String email = emailRequest.getEmail();
+
+        mailService.sendConfirmationEmail(email);
+
+        return "Confirmation email sent successfully";
+    }
+
+
 
 
 

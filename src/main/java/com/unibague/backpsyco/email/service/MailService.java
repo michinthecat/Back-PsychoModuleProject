@@ -3,6 +3,7 @@ package com.unibague.backpsyco.email.service;
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
@@ -10,13 +11,17 @@ import org.thymeleaf.context.Context;
 @Service
 public class MailService {
 
-    private final static String MY_EMAIL = "jhon.bravo@ias.com.co";
+    @Value("${aws.emailSender}")
+    private String MY_EMAIL;
 
     @Autowired
     private AmazonSimpleEmailService client;
 
     @Autowired
-    private TemplateEngine templateEngine;
+    private TemplateEngine templateEnginePre;
+
+    @Autowired
+    private TemplateEngine templateEngineConfirm;
 
     public void sendHello(){
         Destination destination = new Destination().withToAddresses(MY_EMAIL);
@@ -57,13 +62,30 @@ public class MailService {
         context.setVariable("domain", "UNIBAGUE");
         context.setVariable("confirmationLink", confirmationLink);
 
-        String htmlBody = this.templateEngine.process("Pre-Confirmation", context);
+        String htmlBody = this.templateEnginePre.process("Pre-Confirmation", context);
 
         Message message = new Message()
                 .withSubject(new Content("Confirmación de la reserva - Unidad Psicologica"))
 
                 .withBody(new Body().withHtml(new Content(htmlBody)));
         System.out.println(htmlBody);
+
+        SendEmailRequest request = new SendEmailRequest()
+                .withSource(MY_EMAIL)
+                .withDestination(destination)
+                .withMessage(message);
+
+        client.sendEmail(request);
+    }
+
+    public void sendConfirmationEmail(String email) {
+        Destination destination = new Destination().withToAddresses(email);
+
+        String htmlBody = this.templateEngineConfirm.process("Confirmation", new Context());
+
+        Message message = new Message()
+                .withSubject(new Content("Su Cita Ha Sido CONFIRMADA Exitosamente!"))
+                .withBody(new Body().withHtml(new Content(htmlBody)));
 
         SendEmailRequest request = new SendEmailRequest()
                 .withSource(MY_EMAIL)

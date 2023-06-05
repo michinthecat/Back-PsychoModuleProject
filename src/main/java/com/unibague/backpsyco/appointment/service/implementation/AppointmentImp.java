@@ -2,6 +2,7 @@ package com.unibague.backpsyco.appointment.service.implementation;
 
 import com.unibague.backpsyco.appointment.model.AppointmentDTO;
 import com.unibague.backpsyco.appointment.repository.AppointmentRepository;
+import com.unibague.backpsyco.appointment.service.AppointmentService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
