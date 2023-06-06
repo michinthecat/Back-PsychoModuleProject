@@ -7,13 +7,6 @@ import java.util.List;
 //Contratos
 public interface StateGateway {
 
-    public void saveState(State state);
-
-    public State getStateById(Integer id);
-
-    public void deleteStateById(Integer id);
-
-    public void updateState(State state);
-
-    public List<State> getAllState();
+  //Busca por nombre
+    State findByName(String name);
 }

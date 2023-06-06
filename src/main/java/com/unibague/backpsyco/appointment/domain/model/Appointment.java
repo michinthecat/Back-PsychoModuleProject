@@ -1,4 +1,4 @@
-package com.unibague.backpsyco.appointmentcorrect.domain.model;
+package com.unibague.backpsyco.appointment.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

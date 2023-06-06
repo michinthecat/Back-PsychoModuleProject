@@ -1,7 +1,7 @@
 package com.unibague.backpsyco.psychologist.infraestructure.driveradapter;
 
 
-import com.unibague.backpsyco.appointmentcorrect.infraestructure.driveradapter.AppointmentData;
+import com.unibague.backpsyco.appointment.infraestructure.driveradapter.AppointmentData;
 import com.unibague.backpsyco.role.infraestructure.driveradapter.RoleData;
 import com.unibague.backpsyco.schedule.infraestructure.driveradapter.ScheduleData;
 import com.unibague.backpsyco.service.infraestructure.driveradapter.ServiceData;

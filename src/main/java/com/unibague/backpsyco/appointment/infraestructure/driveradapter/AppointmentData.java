@@ -1,4 +1,4 @@
-package com.unibague.backpsyco.appointmentcorrect.infraestructure.driveradapter;
+package com.unibague.backpsyco.appointment.infraestructure.driveradapter;
 
 import com.unibague.backpsyco.patient.infraestructure.driveradapter.PatientData;
 import com.unibague.backpsyco.psychologist.infraestructure.driveradapter.PsychologistData;

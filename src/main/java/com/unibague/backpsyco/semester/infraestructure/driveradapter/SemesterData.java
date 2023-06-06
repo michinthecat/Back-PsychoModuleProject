@@ -1,10 +1,8 @@
 package com.unibague.backpsyco.semester.infraestructure.driveradapter;
 
-import com.unibague.backpsyco.programpatient.infraestructure.driveradapter.ProgramPatientData;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Set;
 
 @Entity
 @Table(name = "semesters")

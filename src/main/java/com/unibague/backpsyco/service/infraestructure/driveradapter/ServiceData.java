@@ -1,6 +1,6 @@
 package com.unibague.backpsyco.service.infraestructure.driveradapter;
 
-import com.unibague.backpsyco.appointmentcorrect.infraestructure.driveradapter.AppointmentData;
+import com.unibague.backpsyco.appointment.infraestructure.driveradapter.AppointmentData;
 import com.unibague.backpsyco.psychologist.infraestructure.driveradapter.PsychologistData;
 import jakarta.persistence.*;
 import lombok.Data;

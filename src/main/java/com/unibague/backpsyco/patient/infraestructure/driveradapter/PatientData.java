@@ -1,14 +1,10 @@
 package com.unibague.backpsyco.patient.infraestructure.driveradapter;
 
-import com.unibague.backpsyco.appointmentcorrect.infraestructure.driveradapter.AppointmentData;
 import com.unibague.backpsyco.gender.infraestructure.driveradapter.GenderData;
 import com.unibague.backpsyco.patienttype.infraestructure.driveradapter.PatientTypeData;
 
-import com.unibague.backpsyco.programpatient.infraestructure.driveradapter.ProgramPatientData;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Set;
 
 @Entity
 @Table(name = "patients")
