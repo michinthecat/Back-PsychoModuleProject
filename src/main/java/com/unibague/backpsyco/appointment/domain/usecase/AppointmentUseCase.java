@@ -34,4 +34,8 @@ public class AppointmentUseCase {
         return appointmentGateway.getAppointmentsByStateAndPsychologistId(state, psychologistId);
     }
 
+    public List<Appointment> getAppointmentsByDateRangeAndPsychologistId(Date startDate, Date endDate, int psychologistId) {
+        return appointmentGateway.getAppointmentsByDateRangeAndPsychologistId(startDate, endDate, psychologistId);
+    }
+
 }

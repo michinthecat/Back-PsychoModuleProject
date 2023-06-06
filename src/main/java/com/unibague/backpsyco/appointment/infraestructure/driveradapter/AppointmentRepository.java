@@ -12,6 +12,7 @@ public interface AppointmentRepository extends JpaRepository<AppointmentData, In
     List<AppointmentData> findByDateAndPsychologistId(Date date, int psychologist_id);
     List<AppointmentData> findByPatientIdAndPsychologistId(int patient_id, int psychologist_id);
     List<AppointmentData> findByStateAndPsychologistId(StateData state, int psychologist_id);
+    List<AppointmentData> findByDateBetweenAndPsychologistId(Date startDate, Date endDate, int psychologistId);
 
 
 }

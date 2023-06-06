@@ -11,4 +11,5 @@ public interface AppointmentGateway {
     List<Appointment> getAppointmentsByDateAndPsychologistId(Date date, int psychologistId);
     List<Appointment> getAppointmentsByPatientIdAndPsychologistId(int patientId, int psychologistId);
     List<Appointment> getAppointmentsByStateAndPsychologistId(String state, int psychologistId);
+    List<Appointment> getAppointmentsByDateRangeAndPsychologistId(Date startDate, Date endDate, int psychologistId);
 }

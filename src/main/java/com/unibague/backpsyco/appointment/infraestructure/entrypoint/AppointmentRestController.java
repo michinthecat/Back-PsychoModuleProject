@@ -7,6 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -42,6 +45,22 @@ public class AppointmentRestController {
             @PathVariable String state,
             @PathVariable int psychologistId) {
         return appointmentUseCase.getAppointmentsByStateAndPsychologistId(state, psychologistId);
+    }
+
+    @GetMapping("/range")
+    public List<Appointment> getAppointmentsByDateRangeAndPsychologistId(
+            @RequestParam("start") String startStr,
+            @RequestParam("end") String endStr,
+            @RequestParam("psychologistId") int psychologistId
+    ) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime startDateTime = LocalDateTime.parse(startStr, formatter);
+        LocalDateTime endDateTime = LocalDateTime.parse(endStr, formatter);
+
+        Date startDate = Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(endDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+        return appointmentUseCase.getAppointmentsByDateRangeAndPsychologistId(startDate, endDate, psychologistId);
     }
 
 }

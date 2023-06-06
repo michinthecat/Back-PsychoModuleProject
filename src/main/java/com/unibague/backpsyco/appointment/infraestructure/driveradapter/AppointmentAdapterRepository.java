@@ -48,4 +48,11 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
                 .map(AppointmentMapper::fromData)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<Appointment> getAppointmentsByDateRangeAndPsychologistId(Date startDate, Date endDate, int psychologistId) {
+        return appointmentRepository.findByDateBetweenAndPsychologistId(startDate, endDate, psychologistId).stream()
+                .map(AppointmentMapper::fromData)
+                .collect(Collectors.toList());
+    }
 }
