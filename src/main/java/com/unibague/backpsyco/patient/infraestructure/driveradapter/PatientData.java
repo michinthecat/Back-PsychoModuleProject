@@ -38,5 +38,7 @@ public class PatientData {
     @JoinColumn(name = "genderid", nullable = false)
     private GenderData gender;
 
+    @Column(name = "notes", columnDefinition="TEXT")
+    private String notes;
 
 }

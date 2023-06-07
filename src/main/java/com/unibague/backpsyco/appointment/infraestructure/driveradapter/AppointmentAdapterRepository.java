@@ -8,6 +8,8 @@ import com.unibague.backpsyco.state.infraestructure.driveradapter.StateRepositor
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,4 +57,37 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
                 .map(AppointmentMapper::fromData)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Appointment rescheduleAppointment(int appointmentId, LocalDateTime newDateTime) {
+        AppointmentData appointmentData = appointmentRepository.findById(appointmentId).orElseThrow(() -> new IllegalArgumentException("Invalid appointment Id:" + appointmentId));
+
+        // Convert LocalDateTime to java.util.Date
+        Date newDate = Date.from(newDateTime.atZone(ZoneId.systemDefault()).toInstant());
+
+        appointmentData.setDate(newDate);
+
+        return AppointmentMapper.fromData(appointmentRepository.save(appointmentData));
+    }
+
+    @Override
+    public boolean cancelAppointment(int appointmentId) {
+        try {
+            AppointmentData appointmentData = appointmentRepository.findById(appointmentId)
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid appointment Id:" + appointmentId));
+
+            StateData cancelledState = new StateData();
+            cancelledState.setState("Cancelada");
+            cancelledState.setId(3);
+
+            appointmentData.setState(cancelledState);
+
+            appointmentRepository.save(appointmentData);
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
 }

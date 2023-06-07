@@ -17,7 +17,4 @@ public class StateData {
     @Column(name = "state", nullable = false)
     private String state;
 
-    // Agrega la relación uno a muchos con la tabla 'appointments'
-    @OneToMany(mappedBy = "state")
-    private Set<AppointmentData> appointments;
 }
