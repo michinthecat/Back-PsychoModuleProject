@@ -85,7 +85,7 @@
                 </configuration>
             </plugin>
         </plugins>
-        <finalName>psyco-back</finalName>
+        <finalName>psyco-back0.2</finalName>
     </build>
 
 </project>
