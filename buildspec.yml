@@ -14,5 +14,5 @@ phases:
       - echo Build complete.
 artifacts:
   files:
-    - target/BackendSpringPsico-CodeBuild-0.0.2-SNAPSHOT.jar
+    - BackendSpringPsico-CodeBuild-0.0.2-SNAPSHOT.jar
 
