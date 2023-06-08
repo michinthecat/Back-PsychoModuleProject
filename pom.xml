@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.unibague</groupId>
-    <artifactId>BackendSpringPsico</artifactId>
+    <artifactId>BackendSpringPsico-CodeBuild</artifactId>
     <version>0.0.2-SNAPSHOT</version>
     <name>back-psyco</name>
     <description>back-psyco</description>
