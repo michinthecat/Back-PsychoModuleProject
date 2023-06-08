@@ -1,4 +1,5 @@
 version: 0.2
+
 phases:
   install:
     runtime-versions:
@@ -11,9 +12,8 @@ phases:
       - mvn package
   post_build:
     commands:
-      -
-      - echo Build complete.
+      - mv target/*.jar app.jar
+
 artifacts:
   files:
-    - target/BackendSpringPsico-CodeBuild-0.0.2-SNAPSHOT.jar
-
+    - app.jar
