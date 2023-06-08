@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.unibague</groupId>
     <artifactId>BackendSpringPsico-CodeBuild</artifactId>
-    <version>0.0.3-SNAPSHOT</version>
+    <version>1.0</version>
     <name>back-psyco</name>
     <description>back-psyco</description>
     <properties>
