@@ -9,12 +9,12 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.unibague</groupId>
-    <artifactId>back-psyco</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>BackendSpringPsico</artifactId>
+    <version>0.0.1</version>
     <name>back-psyco</name>
     <description>back-psyco</description>
     <properties>
-        <java.version>20</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
         <dependency>
