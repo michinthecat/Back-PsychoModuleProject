@@ -12,6 +12,7 @@ phases:
       - mvn package
   post_build:
     commands:
+      - echo Build completed moving JAR file...
       - mv target/*.jar app.jar
 
 artifacts:
