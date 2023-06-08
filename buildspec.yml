@@ -2,17 +2,16 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: openjdk17
+      java: corretto11
     commands:
       - echo Installing Maven Dependencies...
   build:
     commands:
       - echo Packaging JAR file...
-      - mvn clean package
+      - mvn package
   post_build:
     commands:
       - echo Build complete.
 artifacts:
   files:
     - target/psyco-back.jar
-  discard-paths: yes
