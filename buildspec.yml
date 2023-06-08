@@ -11,8 +11,9 @@ phases:
       - mvn package
   post_build:
     commands:
+      -
       - echo Build complete.
 artifacts:
   files:
-    - BackendSpringPsico-CodeBuild-0.0.2-SNAPSHOT.jar
+    - target/BackendSpringPsico-CodeBuild-0.0.2-SNAPSHOT.jar
 
