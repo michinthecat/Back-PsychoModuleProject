@@ -4,6 +4,8 @@ import com.unibague.backpsyco.appointment.domain.model.gateway.AppointmentGatewa
 import com.unibague.backpsyco.appointment.domain.usecase.AppointmentUseCase;
 import com.unibague.backpsyco.patient.domain.model.gateway.PatientGateway;
 import com.unibague.backpsyco.patient.domain.usecase.PatientUseCase;
+import com.unibague.backpsyco.programpatient.domain.model.gateway.ProgramPatientGateway;
+import com.unibague.backpsyco.programpatient.domain.model.usecase.ProgramPatientUseCase;
 import com.unibague.backpsyco.tipopaciente.domain.model.gateway.TipoPacienteGateway;
 import com.unibague.backpsyco.tipopaciente.domain.usecase.TipoPacienteUseCase;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +27,11 @@ public class UseCaseConfig {
     @Bean
     public PatientUseCase patientUseCase(PatientGateway patientGateway){
         return new PatientUseCase(patientGateway);
+    }
+
+    @Bean
+    public ProgramPatientUseCase programPatientUseCase(ProgramPatientGateway programPatientGateway){
+        return new ProgramPatientUseCase(programPatientGateway);
     }
 
 }
