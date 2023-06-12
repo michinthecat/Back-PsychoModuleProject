@@ -10,6 +10,8 @@ import com.unibague.backpsyco.psychologist.domain.model.gateway.PsychologistGate
 import com.unibague.backpsyco.psychologist.domain.usecase.PsychologistUseCase;
 import com.unibague.backpsyco.schedule.domain.model.gateway.ScheduleGateway;
 import com.unibague.backpsyco.schedule.domain.usecase.ScheduleUseCase;
+import com.unibague.backpsyco.specialties.domain.model.gateway.SpecialityGateway;
+import com.unibague.backpsyco.specialties.domain.usecase.SpecialityUseCase;
 import com.unibague.backpsyco.tipopaciente.domain.model.gateway.TipoPacienteGateway;
 import com.unibague.backpsyco.tipopaciente.domain.usecase.TipoPacienteUseCase;
 import org.springframework.context.annotation.Bean;
@@ -45,6 +47,11 @@ public class UseCaseConfig {
     @Bean
     public ScheduleUseCase scheduleUseCase(ScheduleGateway scheduleGateway){
              return new ScheduleUseCase(scheduleGateway);
+    }
+
+    @Bean
+    public SpecialityUseCase specialityUseCase(SpecialityGateway specialityGateway){
+        return new SpecialityUseCase(specialityGateway);
     }
 
 }

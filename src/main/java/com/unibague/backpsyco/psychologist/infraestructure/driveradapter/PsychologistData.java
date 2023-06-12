@@ -1,7 +1,7 @@
 package com.unibague.backpsyco.psychologist.infraestructure.driveradapter;
 import com.unibague.backpsyco.role.infraestructure.driveradapter.RoleData;
 import com.unibague.backpsyco.service.infraestructure.driveradapter.ServiceData;
-import com.unibague.backpsyco.specialties.infraestructure.driveradapter.SpecialtyData;
+import com.unibague.backpsyco.specialties.infraestructure.driveradapter.SpecialityData;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -23,12 +23,12 @@ public class  PsychologistData {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "specialtyid", nullable = false)
-    private SpecialtyData specialty;
+    private SpecialityData specialty;
 
     @ManyToOne
     @JoinColumn(name = "roleid", nullable = false)

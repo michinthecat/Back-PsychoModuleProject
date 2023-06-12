@@ -7,7 +7,7 @@ import com.unibague.backpsyco.role.infraestructure.driveradapter.RoleData;
 import com.unibague.backpsyco.service.domain.model.Service;
 import com.unibague.backpsyco.service.infraestructure.driveradapter.ServiceData;
 import com.unibague.backpsyco.specialties.domain.model.Specialty;
-import com.unibague.backpsyco.specialties.infraestructure.driveradapter.SpecialtyData;
+import com.unibague.backpsyco.specialties.infraestructure.driveradapter.SpecialityData;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,7 +26,7 @@ public class PsychologistMapper {
         roleData.setId(psychologist.getRole().getId());
         roleData.setRole(psychologist.getRole().getRole());
 
-        SpecialtyData specialtyData = new SpecialtyData();
+        SpecialityData specialtyData = new SpecialityData();
         specialtyData.setId(psychologist.getSpecialty().getId());
         specialtyData.setSpecialty(psychologist.getSpecialty().getSpecialty());
 

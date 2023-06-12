@@ -8,5 +8,7 @@ import java.util.List;
 public interface PsychologistGateway {
     List<Psychologist> getAll();
     Psychologist getById(int id);
+    Psychologist save(Psychologist psychologist);
+    Boolean delete(int id);
 
 }

@@ -28,4 +28,21 @@ public class PsychologistAdapterRepository implements PsychologistGateway {
                 .map(PsychologistMapper::fromData)
                 .orElse(null);
     }
+
+    @Override
+    public Psychologist save(Psychologist psychologist) {
+        PsychologistData psychologistData = PsychologistMapper.toData(psychologist);
+        PsychologistData savedPsychologistData = psychologistRepository.save(psychologistData);
+        return PsychologistMapper.fromData(savedPsychologistData);
+    }
+
+    @Override
+    public Boolean delete(int id) {
+        try {
+            psychologistRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
