@@ -15,14 +15,23 @@ public class PatientRestController {
 
     private final PatientUseCase patientUseCase;
 
-    @PutMapping
-    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) {
-        return ResponseEntity.ok(patientUseCase.updatePatient(patient));
+    @GetMapping("/{id}")
+    public ResponseEntity<Patient> getPatientById(@PathVariable("id") int patientId) {
+        Patient patient = patientUseCase.getPatientById(patientId);
+        if (patient == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(patient);
     }
 
     @GetMapping("/{id}/notes")
     public ResponseEntity<String> getPatientNotes(@PathVariable("id") int patientId) {
         return ResponseEntity.ok(patientUseCase.getPatientNotes(patientId));
+    }
+
+    @PutMapping
+    public ResponseEntity<Patient> updatePatient(@RequestBody Patient patient) {
+        return ResponseEntity.ok(patientUseCase.updatePatient(patient));
     }
 
     @PatchMapping("/{id}/notes")

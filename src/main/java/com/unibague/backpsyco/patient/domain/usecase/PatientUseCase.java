@@ -26,4 +26,8 @@ public class PatientUseCase {
         }
         return patientGateway.updatePatientNotes(patientId, newNotes);
     }
+
+    public Patient getPatientById(int patientId) {
+        return patientGateway.getPatientById(patientId);
+    }
 }

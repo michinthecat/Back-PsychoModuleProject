@@ -19,34 +19,10 @@ import java.util.stream.Collectors;
 public class AppointmentAdapterRepository implements AppointmentGateway {
 
     private final AppointmentRepository appointmentRepository;
-    private final StateRepository stateRepository;
-
-    @Override
-    public List<Appointment> getAppointmentsByPsychologistId(int psychologistId) {
-        return appointmentRepository.findByPsychologistId(psychologistId).stream()
-                .map(AppointmentMapper::fromData)
-                .collect(Collectors.toList());
-    }
 
     @Override
     public List<Appointment> getAppointmentsByDateAndPsychologistId(Date date, int psychologistId) {
         return appointmentRepository.findByDateAndPsychologistId(date, psychologistId).stream()
-                .map(AppointmentMapper::fromData)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Appointment> getAppointmentsByPatientIdAndPsychologistId(int patientId, int psychologistId) {
-        return appointmentRepository.findByPatientIdAndPsychologistId(patientId, psychologistId).stream()
-                .map(AppointmentMapper::fromData)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<Appointment> getAppointmentsByStateAndPsychologistId(String state, int psychologistId) {
-        StateData stateData = stateRepository.findByState(state.toUpperCase())
-                .orElseThrow(() -> new IllegalArgumentException("State not found"));
-        return appointmentRepository.findByStateAndPsychologistId(stateData, psychologistId).stream()
                 .map(AppointmentMapper::fromData)
                 .collect(Collectors.toList());
     }
@@ -77,7 +53,7 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
                     .orElseThrow(() -> new IllegalArgumentException("Invalid appointment Id:" + appointmentId));
 
             StateData cancelledState = new StateData();
-            cancelledState.setState("Cancelada");
+            //cancelledState.setState("Cancelado");
             cancelledState.setId(3);
 
             appointmentData.setState(cancelledState);

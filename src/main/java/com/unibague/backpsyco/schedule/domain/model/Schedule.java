@@ -1,7 +1,5 @@
 package com.unibague.backpsyco.schedule.domain.model;
 
-import com.unibague.backpsyco.psychologist.domain.model.Psychologist;
-import com.unibague.backpsyco.state.domain.model.State;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +14,7 @@ public class Schedule {
     private int id;
     private LocalDate date;
     private LocalTime time;
-    private Psychologist psychologist;
-    private State state;
+    private int psychologist;
+    private int state;
 
 }

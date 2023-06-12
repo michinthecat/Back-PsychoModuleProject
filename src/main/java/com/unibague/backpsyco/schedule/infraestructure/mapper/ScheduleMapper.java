@@ -12,35 +12,22 @@ import com.unibague.backpsyco.state.infraestructure.driveradapter.StateData;
 
 public class ScheduleMapper {
     public static Schedule fromData(ScheduleData data) {
-        Psychologist psychologist = new Psychologist();
-        psychologist.setId(data.getPsychologist().getId());
-        psychologist.setName(data.getPsychologist().getName());
-        psychologist.setLastName(data.getPsychologist().getLastName());
-        psychologist.setEmail(data.getPsychologist().getEmail());
-
-        State state = new State();
-        state.setId(data.getState().getId());
-        state.setState(data.getState().getState());
 
         return new Schedule(
                 data.getId(),
                 data.getDate(),
                 data.getTime(),
-                psychologist,
-                state
+                data.getPsychologist().getId(),
+                data.getState().getId()
         );
     }
 
     public static ScheduleData toData(Schedule model) {
         PsychologistData psychologistData = new PsychologistData();
-        psychologistData.setId(model.getPsychologist().getId());
-        psychologistData.setName(model.getPsychologist().getName());
-        psychologistData.setLastName(model.getPsychologist().getLastName());
-        psychologistData.setEmail(model.getPsychologist().getEmail());
+        psychologistData.setId(model.getPsychologist());
 
         StateData stateData = new StateData();
-        stateData.setId(model.getState().getId());
-        stateData.setState(model.getState().getState());
+        stateData.setId(model.getState());
 
         ScheduleData data = new ScheduleData();
         data.setId(model.getId());

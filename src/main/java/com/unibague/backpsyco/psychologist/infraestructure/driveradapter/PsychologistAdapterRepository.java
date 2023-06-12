@@ -3,9 +3,6 @@ package com.unibague.backpsyco.psychologist.infraestructure.driveradapter;
 import com.unibague.backpsyco.psychologist.domain.model.Psychologist;
 import com.unibague.backpsyco.psychologist.domain.model.gateway.PsychologistGateway;
 import com.unibague.backpsyco.psychologist.infraestructure.mapper.PsychologistMapper;
-import com.unibague.backpsyco.schedule.domain.model.Schedule;
-import com.unibague.backpsyco.schedule.infraestructure.driveradapter.ScheduleData;
-import com.unibague.backpsyco.schedule.infraestructure.driveradapter.ScheduleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 

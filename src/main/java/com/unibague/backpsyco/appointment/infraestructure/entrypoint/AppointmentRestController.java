@@ -23,14 +23,6 @@ public class AppointmentRestController {
 
     private final AppointmentUseCase appointmentUseCase;
 
-    @GetMapping("/psychologist/{psychologistId}")
-    public ResponseEntity<List<Appointment>> getAppointmentsByPsychologistId(@PathVariable int psychologistId) {
-        List<Appointment> appointments = appointmentUseCase.getAppointmentsByPsychologistId(psychologistId);
-        return appointments != null && !appointments.isEmpty()
-                ? ResponseEntity.ok(appointments)
-                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
-
     @GetMapping("/date/{date}/psychologist/{psychologistId}")
     public ResponseEntity<List<Appointment>> getAppointmentsByDateAndPsychologistId(
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
@@ -41,25 +33,6 @@ public class AppointmentRestController {
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
-    @GetMapping("/patient/{patientId}/psychologist/{psychologistId}")
-    public ResponseEntity<List<Appointment>> getAppointmentsByPatientIdAndPsychologistId(
-            @PathVariable int patientId,
-            @PathVariable int psychologistId) {
-        List<Appointment> appointments = appointmentUseCase.getAppointmentsByPatientIdAndPsychologistId(patientId, psychologistId);
-        return appointments != null && !appointments.isEmpty()
-                ? ResponseEntity.ok(appointments)
-                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
-
-    @GetMapping("/state/{state}/psychologist/{psychologistId}")
-    public ResponseEntity<List<Appointment>> getAppointmentsByStateAndPsychologistId(
-            @PathVariable String state,
-            @PathVariable int psychologistId) {
-        List<Appointment> appointments = appointmentUseCase.getAppointmentsByStateAndPsychologistId(state, psychologistId);
-        return appointments != null && !appointments.isEmpty()
-                ? ResponseEntity.ok(appointments)
-                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-    }
 
     @GetMapping("/range")
     public ResponseEntity<List<Appointment>> getAppointmentsByDateRangeAndPsychologistId(

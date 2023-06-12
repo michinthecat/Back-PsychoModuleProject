@@ -13,6 +13,13 @@ public class PatientAdapterRepository implements PatientGateway {
     private final PatientRepository patientRepository;
 
     @Override
+    public Patient getPatientById(int patientId) {
+        PatientData patientData = patientRepository.findById(patientId)
+                .orElseThrow(() -> new IllegalArgumentException("Patient not found with ID: " + patientId));
+        return PatientMapper.fromData(patientData);
+    }
+
+    @Override
     public Patient updatePatient(Patient patient) {
         PatientData patientData = PatientMapper.toData(patient);
         return PatientMapper.fromData(patientRepository.save(patientData));

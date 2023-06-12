@@ -16,18 +16,19 @@ public class ScheduleRestController {
 
     private final ScheduleUseCase scheduleUseCase;
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Schedule>> getAllSchedules() {
-        List<Schedule> schedules = scheduleUseCase.getAllSchedules();
-        if (schedules.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(schedules, HttpStatus.OK);
-    }
 
     @PostMapping
     public ResponseEntity<Schedule> saveSchedule(@RequestBody Schedule schedule) {
         return ResponseEntity.ok(scheduleUseCase.saveSchedule(schedule));
+    }
+
+    @GetMapping("/{psychologistId}/{stateId}")
+    public ResponseEntity<List<Schedule>> getScheduleByPsychologistIdAndStateId(@PathVariable int psychologistId, @PathVariable int stateId) {
+        List<Schedule> schedules = scheduleUseCase.getScheduleByPsychologistIdAndStateId(psychologistId, stateId);
+        if (schedules.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(schedules, HttpStatus.OK);
     }
 
 }

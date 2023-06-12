@@ -5,7 +5,6 @@ import com.unibague.backpsyco.state.infraestructure.driveradapter.StateData;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -26,11 +25,11 @@ public class ScheduleData {
     @Column(name = "time", nullable = false)
     private LocalTime time;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "psychologist_id", nullable = false)
     private PsychologistData psychologist;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "stateid", nullable = false)
     private StateData state;
 }
