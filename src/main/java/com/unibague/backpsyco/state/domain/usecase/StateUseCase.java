@@ -12,4 +12,6 @@ public class StateUseCase {
     private final StateGateway stateGateway;
 
 
+
+
 }

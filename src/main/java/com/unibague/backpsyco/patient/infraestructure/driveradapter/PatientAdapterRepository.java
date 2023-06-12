@@ -19,13 +19,6 @@ public class PatientAdapterRepository implements PatientGateway {
     }
 
     @Override
-    public Patient getPatientById(int patientId) {
-        PatientData patientData = patientRepository.findById(patientId).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + patientId));
-        return PatientMapper.fromData(patientData);
-    }
-
-
-    @Override
     public String getPatientNotes(int patientId) {
         PatientData patientData = patientRepository.findById(patientId).orElseThrow(() -> new IllegalArgumentException("Invalid patient Id:" + patientId));
         return patientData.getNotes();

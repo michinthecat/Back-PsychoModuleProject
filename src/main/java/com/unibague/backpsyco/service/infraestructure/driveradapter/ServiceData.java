@@ -29,7 +29,4 @@ public class ServiceData {
     @ManyToMany(mappedBy = "services")
     private Set<PsychologistData> psychologists;
 
-    // Agrega la relación uno a muchos con la tabla 'appointments'
-    @OneToMany(mappedBy = "service")
-    private Set<AppointmentData> appointments;
 }

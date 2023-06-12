@@ -18,7 +18,4 @@ public class SpecialtyData {
     @Column(name = "specialty", nullable = false)
     private String specialty;
 
-    // Agrega la relación con la tabla 'psychologists'
-    @OneToMany(mappedBy = "specialty")
-    private Set<PsychologistData> psychologists;
 }

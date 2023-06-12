@@ -20,11 +20,6 @@ public class PatientRestController {
         return ResponseEntity.ok(patientUseCase.updatePatient(patient));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Patient> getPatientById(@PathVariable("id") int patientId) {
-        return ResponseEntity.of(Optional.of(patientUseCase.getPatientById(patientId)));
-    }
-
     @GetMapping("/{id}/notes")
     public ResponseEntity<String> getPatientNotes(@PathVariable("id") int patientId) {
         return ResponseEntity.ok(patientUseCase.getPatientNotes(patientId));

@@ -1,8 +1,13 @@
 package com.unibague.backpsyco.psychologist.domain.model;
 
+import com.unibague.backpsyco.role.domain.model.Role;
+import com.unibague.backpsyco.service.domain.model.Service;
+import com.unibague.backpsyco.specialties.domain.model.Specialty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,6 +17,7 @@ public class Psychologist {
     private String name;
     private String lastName;
     private String email;
-    private int specialtyId;
-    private int roleId;
+    private Specialty specialty;
+    private Role role;
+    private List<Service> services;
 }

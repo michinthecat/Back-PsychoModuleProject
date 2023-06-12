@@ -7,7 +7,6 @@ import java.util.List;
 public interface PatientGateway {
 
     Patient updatePatient(Patient patient);
-    Patient getPatientById(int patientId);
     String getPatientNotes(int patientId);
     Patient updatePatientNotes(int patientId, String newNotes);
 

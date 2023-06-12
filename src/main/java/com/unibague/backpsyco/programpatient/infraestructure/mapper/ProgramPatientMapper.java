@@ -13,13 +13,11 @@ public class ProgramPatientMapper {
         ProgramPatient programPatient = new ProgramPatient();
         programPatient.setId(data.getId());
 
-        // Mapeo de Program
         Program program = new Program();
         program.setId(data.getProgram().getId());
         program.setProgram(data.getProgram().getProgram());
         programPatient.setProgram(program);
 
-        // Mapeo de Patient
         Patient patient = new Patient();
         patient.setId(data.getPatient().getId());
         patient.setName(data.getPatient().getName());
@@ -41,7 +39,6 @@ public class ProgramPatientMapper {
 
         programPatient.setPatient(patient);
 
-        // Mapeo de Semester
         Semester semester = new Semester();
         semester.setId(data.getSemester().getId());
         semester.setSemester(data.getSemester().getSemester());
