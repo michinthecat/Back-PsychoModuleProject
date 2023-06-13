@@ -1,6 +1,5 @@
 package com.unibague.backpsyco.core.exception;
 
-import com.amazonaws.services.kms.model.NotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;

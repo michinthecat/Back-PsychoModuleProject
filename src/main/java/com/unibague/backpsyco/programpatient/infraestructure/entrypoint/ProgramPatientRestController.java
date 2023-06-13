@@ -1,7 +1,7 @@
 package com.unibague.backpsyco.programpatient.infraestructure.entrypoint;
 
 import com.unibague.backpsyco.programpatient.domain.model.ProgramPatient;
-import com.unibague.backpsyco.programpatient.domain.model.usecase.ProgramPatientUseCase;
+import com.unibague.backpsyco.programpatient.domain.usecase.ProgramPatientUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

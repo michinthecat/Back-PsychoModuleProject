@@ -19,11 +19,7 @@ public class ProgramPatientAdapterRepository implements ProgramPatientGateway {
     @Override
     public List<ProgramPatient> findByPatientId(int patientId) {
         List<ProgramPatientData> data = programPatientRepository.findByPatient_Id(patientId);
-        return data.stream().map(this::toDomain).collect(Collectors.toList());
-    }
-
-    private ProgramPatient toDomain(ProgramPatientData data) {
-        return ProgramPatientMapper.fromData(data);
+        return data.stream().map(ProgramPatientMapper::fromData).collect(Collectors.toList());
     }
 
 

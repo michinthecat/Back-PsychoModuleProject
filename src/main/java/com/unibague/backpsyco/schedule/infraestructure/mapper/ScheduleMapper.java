@@ -1,13 +1,8 @@
 package com.unibague.backpsyco.schedule.infraestructure.mapper;
 
-
-import com.unibague.backpsyco.psychologist.domain.model.Psychologist;
 import com.unibague.backpsyco.psychologist.infraestructure.driveradapter.PsychologistData;
-import com.unibague.backpsyco.role.domain.model.Role;
 import com.unibague.backpsyco.schedule.domain.model.Schedule;
 import com.unibague.backpsyco.schedule.infraestructure.driveradapter.ScheduleData;
-import com.unibague.backpsyco.specialties.domain.model.Specialty;
-import com.unibague.backpsyco.state.domain.model.State;
 import com.unibague.backpsyco.state.infraestructure.driveradapter.StateData;
 
 public class ScheduleMapper {

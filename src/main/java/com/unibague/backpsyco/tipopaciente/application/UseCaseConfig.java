@@ -5,11 +5,13 @@ import com.unibague.backpsyco.appointment.domain.usecase.AppointmentUseCase;
 import com.unibague.backpsyco.patient.domain.model.gateway.PatientGateway;
 import com.unibague.backpsyco.patient.domain.usecase.PatientUseCase;
 import com.unibague.backpsyco.programpatient.domain.model.gateway.ProgramPatientGateway;
-import com.unibague.backpsyco.programpatient.domain.model.usecase.ProgramPatientUseCase;
+import com.unibague.backpsyco.programpatient.domain.usecase.ProgramPatientUseCase;
 import com.unibague.backpsyco.psychologist.domain.model.gateway.PsychologistGateway;
 import com.unibague.backpsyco.psychologist.domain.usecase.PsychologistUseCase;
 import com.unibague.backpsyco.schedule.domain.model.gateway.ScheduleGateway;
 import com.unibague.backpsyco.schedule.domain.usecase.ScheduleUseCase;
+import com.unibague.backpsyco.service.domain.model.gateway.ServiceGateway;
+import com.unibague.backpsyco.service.domain.usecase.ServiceUseCase;
 import com.unibague.backpsyco.specialties.domain.model.gateway.SpecialityGateway;
 import com.unibague.backpsyco.specialties.domain.usecase.SpecialityUseCase;
 import com.unibague.backpsyco.tipopaciente.domain.model.gateway.TipoPacienteGateway;
@@ -52,6 +54,11 @@ public class UseCaseConfig {
     @Bean
     public SpecialityUseCase specialityUseCase(SpecialityGateway specialityGateway){
         return new SpecialityUseCase(specialityGateway);
+    }
+
+    @Bean
+    public ServiceUseCase serviceUseCase(ServiceGateway serviceGateway){
+        return new ServiceUseCase(serviceGateway);
     }
 
 }

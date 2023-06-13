@@ -70,14 +70,14 @@ public class AppointmentRestController {
     public ResponseEntity<String> cancelAppointment(@PathVariable("id") int appointmentId) {
         try {
             if (appointmentUseCase.cancelAppointment(appointmentId)) {
-                return new ResponseEntity<>("Appointment was successfully cancelled", HttpStatus.OK);
+                return new ResponseEntity<>("Cita eliminada exitosamente", HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Error occurred while trying to cancel the appointment", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Ocurrio un error al eliminar la cita", HttpStatus.INTERNAL_SERVER_ERROR);
             }
         } catch (IllegalArgumentException e) {
-            return new ResponseEntity<>("No appointment found with id: " + appointmentId, HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("No se encontro el ID de la Cita:" + appointmentId, HttpStatus.NOT_FOUND);
         } catch (Exception e) {
-            return new ResponseEntity<>("An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Ah ocurrido un error inesperado", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

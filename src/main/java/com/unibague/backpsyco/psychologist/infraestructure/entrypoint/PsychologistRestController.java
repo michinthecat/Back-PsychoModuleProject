@@ -34,4 +34,9 @@ public class PsychologistRestController {
         return new ResponseEntity<>(savedPsychologist, HttpStatus.CREATED);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Boolean> deletePsychologist(@PathVariable int id) {
+        return new ResponseEntity<>(psychologistUseCase.delete(id), HttpStatus.OK);
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.unibague.backpsyco.programpatient.domain.model.usecase;
+package com.unibague.backpsyco.programpatient.domain.usecase;
 
 import com.unibague.backpsyco.programpatient.domain.model.ProgramPatient;
 import com.unibague.backpsyco.programpatient.domain.model.gateway.ProgramPatientGateway;

@@ -1,11 +1,7 @@
 package com.unibague.backpsyco.service.infraestructure.driveradapter;
-
-import com.unibague.backpsyco.appointment.infraestructure.driveradapter.AppointmentData;
-import com.unibague.backpsyco.psychologist.infraestructure.driveradapter.PsychologistData;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.Set;
 
 @Entity
 @Table(name = "services")
@@ -24,9 +20,5 @@ public class ServiceData {
 
     @Column(name = "cost", nullable = false)
     private float cost;
-
-    // Agrega la relación de muchos a muchos con la tabla 'psychologists'
-    @ManyToMany(mappedBy = "services")
-    private Set<PsychologistData> psychologists;
 
 }
