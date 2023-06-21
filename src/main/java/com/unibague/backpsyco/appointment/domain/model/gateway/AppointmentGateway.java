@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+//Aca van los contratos a implementarse en el USECASE
 public interface AppointmentGateway {
 
     List<Appointment> getAppointmentsByDateAndPsychologistId(Date date, int psychologistId);

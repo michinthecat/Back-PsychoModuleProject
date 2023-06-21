@@ -76,8 +76,6 @@ public class AppointmentRestController {
             }
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>("No se encontro el ID de la Cita:" + appointmentId, HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Ah ocurrido un error inesperado", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 

@@ -1,5 +1,4 @@
 package com.unibague.backpsyco.appointment.infraestructure.driveradapter;
-import com.unibague.backpsyco.state.infraestructure.driveradapter.StateData;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Date;

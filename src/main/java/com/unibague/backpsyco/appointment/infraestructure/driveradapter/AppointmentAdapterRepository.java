@@ -13,6 +13,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+//Aca se implementa el contrato del gateway
 @RequiredArgsConstructor
 @Repository
 public class AppointmentAdapterRepository implements AppointmentGateway {

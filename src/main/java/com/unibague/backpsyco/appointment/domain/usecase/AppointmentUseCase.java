@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
+//Aca se implementa el contrato del gateway que se usara en el Controller
 @RequiredArgsConstructor
 public class AppointmentUseCase {
 
