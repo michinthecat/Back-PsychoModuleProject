@@ -35,6 +35,11 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
     }
 
     @Override
+    public Appointment getAppointmentById(int appointmentId) {
+        return AppointmentMapper.fromData(appointmentRepository.findById(appointmentId).orElseThrow(() -> new IllegalArgumentException("ID Cita No Valido: " + appointmentId)));
+    }
+
+    @Override
     public Appointment rescheduleAppointment(int appointmentId, LocalDateTime newDateTime) {
         AppointmentData appointmentData = appointmentRepository.findById(appointmentId).orElseThrow(() -> new IllegalArgumentException("Invalid appointment Id:" + appointmentId));
 

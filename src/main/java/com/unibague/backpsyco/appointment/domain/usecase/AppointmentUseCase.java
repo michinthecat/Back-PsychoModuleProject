@@ -33,6 +33,10 @@ public class AppointmentUseCase {
         return appointmentGateway.cancelAppointment(appointmentId);
     }
 
+    public Appointment getAppointmentById(int appointmentId) {
+        return appointmentGateway.getAppointmentById(appointmentId);
+    }
+
 
 
 

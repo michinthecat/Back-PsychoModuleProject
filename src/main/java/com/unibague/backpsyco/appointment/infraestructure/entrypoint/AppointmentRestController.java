@@ -77,6 +77,17 @@ public class AppointmentRestController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>("No se encontro el ID de la Cita:" + appointmentId, HttpStatus.NOT_FOUND);
         }
+
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Appointment> getAppointmentById(@PathVariable("id") int appointmentId) {
+        try {
+            Appointment appointment = appointmentUseCase.getAppointmentById(appointmentId);
+            return ResponseEntity.ok(appointment);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
 
