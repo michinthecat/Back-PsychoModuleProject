@@ -9,13 +9,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class Appointment {
     private int id;
-    private Timestamp date;
+    private Date date;
     private Service service;
     private Psychologist psychologist;
     private Patient patient;
