@@ -12,7 +12,6 @@ import lombok.Data;
 public class PatientData {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name", nullable = false)

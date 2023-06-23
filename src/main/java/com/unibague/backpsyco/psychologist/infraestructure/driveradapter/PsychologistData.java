@@ -14,7 +14,6 @@ import java.util.List;
 public class  PsychologistData {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "name", nullable = false)
