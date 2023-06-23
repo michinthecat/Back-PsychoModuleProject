@@ -2,6 +2,8 @@ package com.unibague.backpsyco.tipopaciente.application;
 
 import com.unibague.backpsyco.appointment.domain.model.gateway.AppointmentGateway;
 import com.unibague.backpsyco.appointment.domain.usecase.AppointmentUseCase;
+import com.unibague.backpsyco.gender.domain.model.gateway.GenderGateway;
+import com.unibague.backpsyco.gender.domain.usecase.GenderUseCase;
 import com.unibague.backpsyco.patient.domain.model.gateway.PatientGateway;
 import com.unibague.backpsyco.patient.domain.usecase.PatientUseCase;
 import com.unibague.backpsyco.programpatient.domain.model.gateway.ProgramPatientGateway;
@@ -59,6 +61,12 @@ public class UseCaseConfig {
     @Bean
     public ServiceUseCase serviceUseCase(ServiceGateway serviceGateway){
         return new ServiceUseCase(serviceGateway);
+    }
+
+    @Bean
+    public GenderUseCase genderUseCase(GenderGateway genderGateway)
+    {
+        return new GenderUseCase(genderGateway);
     }
 
 }

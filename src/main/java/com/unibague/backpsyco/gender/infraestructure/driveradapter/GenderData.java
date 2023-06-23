@@ -1,11 +1,7 @@
 package com.unibague.backpsyco.gender.infraestructure.driveradapter;
 
-import com.unibague.backpsyco.patient.infraestructure.driveradapter.PatientData;
 import jakarta.persistence.*;
 import lombok.Data;
-
-import java.util.Set;
-
 
 @Entity
 @Table(name = "genders")
@@ -18,5 +14,4 @@ public class GenderData {
 
     @Column(name = "gender", nullable = false)
     private String gender;
-
 }
