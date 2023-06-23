@@ -1,4 +1,4 @@
-package com.unibague.backpsyco.tipopaciente.application;
+package com.unibague.backpsyco.core.config;
 
 import com.unibague.backpsyco.appointment.domain.model.gateway.AppointmentGateway;
 import com.unibague.backpsyco.appointment.domain.usecase.AppointmentUseCase;
@@ -16,18 +16,11 @@ import com.unibague.backpsyco.service.domain.model.gateway.ServiceGateway;
 import com.unibague.backpsyco.service.domain.usecase.ServiceUseCase;
 import com.unibague.backpsyco.specialties.domain.model.gateway.SpecialityGateway;
 import com.unibague.backpsyco.specialties.domain.usecase.SpecialityUseCase;
-import com.unibague.backpsyco.tipopaciente.domain.model.gateway.TipoPacienteGateway;
-import com.unibague.backpsyco.tipopaciente.domain.usecase.TipoPacienteUseCase;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class UseCaseConfig {
-
-    @Bean
-    public TipoPacienteUseCase tipoPacienteUseCase(TipoPacienteGateway tipoPacienteGateway){
-        return new TipoPacienteUseCase(tipoPacienteGateway);
-    }
 
     @Bean
     public AppointmentUseCase appointmentUseCase(AppointmentGateway appointmentGateway){

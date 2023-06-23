@@ -1,4 +1,4 @@
-package com.unibague.backpsyco.tipopaciente.application;
+package com.unibague.backpsyco.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
