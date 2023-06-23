@@ -21,8 +21,11 @@ public class PatientAdapterRepository implements PatientGateway {
 
     @Override
     public Patient updatePatient(Patient patient) {
-        PatientData patientData = PatientMapper.toData(patient);
-        return PatientMapper.fromData(patientRepository.save(patientData));
+        if (patientRepository.existsById(patient.getId())) {
+            PatientData patientData = PatientMapper.toData(patient);
+            return PatientMapper.fromData(patientRepository.save(patientData));
+        }
+        throw new IllegalArgumentException("El Id Del Paciente No Existe");
     }
 
     @Override
