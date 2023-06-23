@@ -6,6 +6,9 @@ import com.unibague.backpsyco.gender.domain.model.gateway.GenderGateway;
 import com.unibague.backpsyco.gender.domain.usecase.GenderUseCase;
 import com.unibague.backpsyco.patient.domain.model.gateway.PatientGateway;
 import com.unibague.backpsyco.patient.domain.usecase.PatientUseCase;
+import com.unibague.backpsyco.patienttype.domain.model.PatientType;
+import com.unibague.backpsyco.patienttype.domain.model.gateway.PatientTypeGateway;
+import com.unibague.backpsyco.patienttype.domain.usecase.PatientTypeUseCase;
 import com.unibague.backpsyco.programpatient.domain.model.gateway.ProgramPatientGateway;
 import com.unibague.backpsyco.programpatient.domain.usecase.ProgramPatientUseCase;
 import com.unibague.backpsyco.psychologist.domain.model.gateway.PsychologistGateway;
@@ -60,6 +63,12 @@ public class UseCaseConfig {
     public GenderUseCase genderUseCase(GenderGateway genderGateway)
     {
         return new GenderUseCase(genderGateway);
+    }
+
+    @Bean
+    public PatientTypeUseCase patientTypeUseCase(PatientTypeGateway patientTypeGateway)
+    {
+        return new PatientTypeUseCase(patientTypeGateway);
     }
 
 }
