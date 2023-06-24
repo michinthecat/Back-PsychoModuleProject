@@ -7,7 +7,9 @@ import com.unibague.backpsyco.state.infraestructure.driveradapter.StateData;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -22,10 +24,20 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
 
     @Override
     public List<Appointment> getAppointmentsByDateAndPsychologistId(Date date, int psychologistId) {
-        return appointmentRepository.findByDateAndPsychologistId(date, psychologistId).stream()
-                .map(AppointmentMapper::fromData)
-                .collect(Collectors.toList());
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDateTime startOfDay = localDate.atStartOfDay();
+        LocalDateTime endOfDay = localDate.atTime(LocalTime.MAX);
+
+        Date startDate = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+
+        List<Appointment> appointments = getAppointmentsByDateRangeAndPsychologistId(startDate, endDate, psychologistId);
+
+        System.out.println(appointments);
+        return appointments;
     }
+
+
 
     @Override
     public List<Appointment> getAppointmentsByDateRangeAndPsychologistId(Date startDate, Date endDate, int psychologistId) {

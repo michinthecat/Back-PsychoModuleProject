@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -27,10 +28,7 @@ public class AppointmentRestController {
     public ResponseEntity<List<Appointment>> getAppointmentsByDateAndPsychologistId(
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
             @PathVariable int psychologistId) {
-        List<Appointment> appointments = appointmentUseCase.getAppointmentsByDateAndPsychologistId(date, psychologistId);
-        return appointments != null && !appointments.isEmpty()
-                ? ResponseEntity.ok(appointments)
-                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.ok(appointmentUseCase.getAppointmentsByDateAndPsychologistId(date, psychologistId));
     }
 
 
