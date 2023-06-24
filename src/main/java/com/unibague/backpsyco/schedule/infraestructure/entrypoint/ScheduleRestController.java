@@ -24,15 +24,6 @@ public class ScheduleRestController {
         return ResponseEntity.ok(scheduleUseCase.saveSchedule(schedule));
     }
 
-    @GetMapping("/{psychologistId}/{stateId}")
-    public ResponseEntity<List<Schedule>> getScheduleByPsychologistIdAndStateId(@PathVariable int psychologistId, @PathVariable int stateId) {
-        List<Schedule> schedules = scheduleUseCase.getScheduleByPsychologistIdAndStateId(psychologistId, stateId);
-        if (schedules.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
-        return new ResponseEntity<>(schedules, HttpStatus.OK);
-    }
-
     @GetMapping("/psychologist/{psychologistId}/date/{date}")
     public ResponseEntity<List<Schedule>> getScheduleByPsychologistIdAndDate(
             @PathVariable int psychologistId,
@@ -42,6 +33,16 @@ public class ScheduleRestController {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
         return new ResponseEntity<>(schedules, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteSchedule(@PathVariable("id") int scheduleId) {
+        try {
+            scheduleUseCase.deleteSchedule(scheduleId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
 

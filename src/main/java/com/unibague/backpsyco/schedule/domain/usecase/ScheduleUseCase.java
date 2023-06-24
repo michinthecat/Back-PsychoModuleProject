@@ -24,6 +24,9 @@ public class ScheduleUseCase {
     public List<Schedule> getScheduleByPsychologistIdAndDate(int psychologistId, LocalDate date){
         return scheduleGateway.getScheduleByPsychologistIdAndDate(psychologistId, date);
     }
+    public void deleteSchedule(int scheduleId){
+        scheduleGateway.deleteSchedule(scheduleId);
+    }
 
 
 }

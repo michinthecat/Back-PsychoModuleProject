@@ -48,5 +48,10 @@ public class ScheduleAdapterRepository implements ScheduleGateway {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public void deleteSchedule(int scheduleId) {
+        scheduleRepository.deleteById(scheduleId);
+    }
+
 
 }
