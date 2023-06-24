@@ -4,6 +4,8 @@ import com.unibague.backpsyco.schedule.domain.model.Schedule;
 import com.unibague.backpsyco.schedule.domain.model.gateway.ScheduleGateway;
 import lombok.RequiredArgsConstructor;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,6 +19,10 @@ public class ScheduleUseCase {
 
     public List<Schedule> getScheduleByPsychologistIdAndStateId(int psychologistId, int stateId){
         return scheduleGateway.getScheduleByPsychologistIdAndStateId(psychologistId, stateId);
+    }
+
+    public List<Schedule> getScheduleByPsychologistIdAndDate(int psychologistId, LocalDate date){
+        return scheduleGateway.getScheduleByPsychologistIdAndDate(psychologistId, date);
     }
 
 
