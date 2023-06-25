@@ -26,7 +26,7 @@ public class  PsychologistData {
     private String email;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "specialtyid")
+    @JoinColumn(name = "specialtyid", nullable = false)
     private SpecialityData specialty;
 
     @ManyToOne
