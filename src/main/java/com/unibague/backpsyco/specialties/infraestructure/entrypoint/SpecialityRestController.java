@@ -33,11 +33,16 @@ public class SpecialityRestController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteSpecialty(@PathVariable("id") int specialtyId) {
-        boolean isDeleted = specialityUseCase.deleteSpecialty(specialtyId);
-        if (isDeleted) {
-            return ResponseEntity.ok("Specialty deleted successfully");
+        try {
+            if(specialityUseCase.deleteSpecialty(specialtyId)){
+                return ResponseEntity.ok("Especialidad eliminada correctamente");
+            }
+            return ResponseEntity.ok("Especialidad no encontrada");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Hubo un error al eliminar la especialidad. No puede estar vinculada a un Psicologo");
         }
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Specialty not found");
+
+
     }
 
     @PutMapping("/{id}")
