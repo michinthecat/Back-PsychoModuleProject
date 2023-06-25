@@ -33,14 +33,6 @@ public class ScheduleAdapterRepository implements ScheduleGateway {
     }
 
     @Override
-    public List<Schedule> getScheduleByPsychologistIdAndStateId(int psychologistId, int stateId) {
-        List<ScheduleData> scheduleDataList = scheduleRepository.findByPsychologistIdAndStateId(psychologistId, stateId);
-        return scheduleDataList.stream()
-                .map(ScheduleMapper::fromData)
-                .collect(Collectors.toList());
-    }
-
-    @Override
     public List<Schedule> getScheduleByPsychologistIdAndDate(int psychologistId, LocalDate date) {
         List<ScheduleData> scheduleDataList = scheduleRepository.findByPsychologistIdAndDate(psychologistId, date);
         return scheduleDataList.stream()

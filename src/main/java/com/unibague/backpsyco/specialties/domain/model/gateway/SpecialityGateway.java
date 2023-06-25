@@ -9,4 +9,5 @@ public interface SpecialityGateway {
     Specialty saveSpecialty(Specialty specialty);
     List<Specialty> getAllSpecialties();
     boolean deleteSpecialty(int specialtyId);
+    boolean updateSpecialty(Specialty specialty);
 }

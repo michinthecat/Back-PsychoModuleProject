@@ -39,4 +39,14 @@ public class SpecialityRestController {
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Specialty not found");
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Specialty> updateSpecialty(@PathVariable("id") int specialtyId, @RequestBody Specialty specialty) {
+        specialty.setId(specialtyId);
+        boolean isUpdated = specialityUseCase.updateSpecialty(specialty);
+        if (isUpdated) {
+            return ResponseEntity.ok(specialty);
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+    }
 }

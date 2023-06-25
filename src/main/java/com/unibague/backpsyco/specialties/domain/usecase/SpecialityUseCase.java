@@ -20,6 +20,7 @@ public class SpecialityUseCase {
     public boolean deleteSpecialty(int specialtyId){
         return specialityGateway.deleteSpecialty(specialtyId);
     }
-
-
+    public boolean updateSpecialty(Specialty specialty){
+        return specialityGateway.updateSpecialty(specialty);
+    }
 }

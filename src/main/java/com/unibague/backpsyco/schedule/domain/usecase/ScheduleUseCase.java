@@ -17,10 +17,6 @@ public class ScheduleUseCase {
         return scheduleGateway.saveSchedule(schedule);
     }
 
-    public List<Schedule> getScheduleByPsychologistIdAndStateId(int psychologistId, int stateId){
-        return scheduleGateway.getScheduleByPsychologistIdAndStateId(psychologistId, stateId);
-    }
-
     public List<Schedule> getScheduleByPsychologistIdAndDate(int psychologistId, LocalDate date){
         return scheduleGateway.getScheduleByPsychologistIdAndDate(psychologistId, date);
     }

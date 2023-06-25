@@ -38,4 +38,14 @@ public class SpecialityAdapterRepository implements SpecialityGateway {
         }
         return false;
     }
+
+    @Override
+    public boolean updateSpecialty(Specialty specialty) {
+        if (specialityRepository.existsById(specialty.getId())) {
+            SpecialityData specialityData = SpecialityMapper.toData(specialty);
+            specialityRepository.save(specialityData);
+            return true;
+        }
+        return false;
+    }
 }

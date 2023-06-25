@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface ScheduleGateway {
     Schedule saveSchedule(Schedule schedule);
-    List<Schedule> getScheduleByPsychologistIdAndStateId(int psychologistId, int stateId);
     List<Schedule> getScheduleByPsychologistIdAndDate(int psychologistId, LocalDate date);
     void deleteSchedule(int scheduleId);
 
