@@ -21,8 +21,10 @@ public class PsychologistUseCase {
         return psychologistGateway.getById(id);
     }
 
-    public Psychologist save(Psychologist psychologist){return psychologistGateway.save(psychologist);}
+    public Psychologist createPsychologist(Psychologist psychologist){return psychologistGateway.createPsychologist(psychologist);}
+    public Psychologist updatePsychologist(Psychologist psychologist){return psychologistGateway.updatePsychologist(psychologist);}
 
     public Boolean delete(int id){return psychologistGateway.delete(id);}
 
+    public Boolean insertServiceToPsychologist(int psychologistId, int serviceId){return psychologistGateway.insertServiceToPsychologist(psychologistId, serviceId);}
 }

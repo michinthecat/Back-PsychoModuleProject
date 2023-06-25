@@ -25,18 +25,56 @@ public class PsychologistRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Psychologist> getById(@PathVariable int id) {
-        return new ResponseEntity<>(psychologistUseCase.getById(id), HttpStatus.OK);
+        Psychologist psychologist = psychologistUseCase.getById(id);
+        if (psychologist != null) {
+            return ResponseEntity.ok(psychologist);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PostMapping
-    public ResponseEntity<Psychologist> savePsychologist(@RequestBody @Validated Psychologist psychologist) {
-        Psychologist savedPsychologist = psychologistUseCase.save(psychologist);
-        return new ResponseEntity<>(savedPsychologist, HttpStatus.CREATED);
+    @PutMapping("/{id}")
+    public ResponseEntity<Psychologist> updatePsychologist(@PathVariable int id, @RequestBody @Validated Psychologist psychologist) {
+        psychologist.setId(id);
+        Psychologist updatedPsychologist = psychologistUseCase.updatePsychologist(psychologist);
+        if (updatedPsychologist != null) {
+            return ResponseEntity.ok(updatedPsychologist);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deletePsychologist(@PathVariable int id) {
-        return new ResponseEntity<>(psychologistUseCase.delete(id), HttpStatus.OK);
+    public ResponseEntity<Void> deletePsychologist(@PathVariable int id) {
+        boolean success = psychologistUseCase.delete(id);
+        if (success) {
+            return ResponseEntity.ok().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
+
+
+    @PostMapping("/{psychologistId}/services/{serviceId}")
+    public ResponseEntity<String> insertServiceToPsychologist(@PathVariable int psychologistId, @PathVariable int serviceId) {
+        boolean success = psychologistUseCase.insertServiceToPsychologist(psychologistId, serviceId);
+        if (success) {
+            return ResponseEntity.ok("Service inserted to psychologist successfully");
+        } else {
+            return ResponseEntity.badRequest().body("Psychologist or service not found");
+        }
+    }
+
+    @PostMapping
+    public ResponseEntity<Psychologist> createPsychologist(@RequestBody @Validated Psychologist psychologist) {
+        try {
+            Psychologist createdPsychologist = psychologistUseCase.createPsychologist(psychologist);
+            return ResponseEntity.status(HttpStatus.CREATED).body(createdPsychologist);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
+
 
 }

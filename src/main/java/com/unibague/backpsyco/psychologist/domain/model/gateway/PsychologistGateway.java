@@ -8,7 +8,9 @@ import java.util.List;
 public interface PsychologistGateway {
     List<Psychologist> getAll();
     Psychologist getById(int id);
-    Psychologist save(Psychologist psychologist);
+    Psychologist createPsychologist(Psychologist psychologist);
+    Psychologist updatePsychologist(Psychologist psychologist);
     Boolean delete(int id);
+    Boolean insertServiceToPsychologist(int psychologistId, int serviceId);
 
 }
