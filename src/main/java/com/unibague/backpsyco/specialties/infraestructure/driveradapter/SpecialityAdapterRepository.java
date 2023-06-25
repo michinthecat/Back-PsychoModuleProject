@@ -36,7 +36,8 @@ public class SpecialityAdapterRepository implements SpecialityGateway {
             specialityRepository.deleteById(specialtyId);
             return true;
         }
-        return false;
+        throw new IllegalArgumentException("Especialidad no encontrada");
+
     }
 
     @Override
