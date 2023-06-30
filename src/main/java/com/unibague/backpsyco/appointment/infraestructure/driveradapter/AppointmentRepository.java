@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface AppointmentRepository extends JpaRepository<AppointmentData, Integer> {
 
-    List<AppointmentData> findByDateAndPsychologistId(Date date, int psychologist_id);
     List<AppointmentData> findByDateBetweenAndPsychologistId(Date startDate, Date endDate, int psychologistId);
 
 
