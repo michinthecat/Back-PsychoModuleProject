@@ -2,6 +2,7 @@ package com.unibague.backpsyco.email.service;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.*;
+import com.unibague.backpsyco.email.model.EmailChangeAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -20,71 +21,22 @@ public class MailService {
     @Autowired
     private TemplateEngine templateEnginePre;
 
-    @Autowired
-    private TemplateEngine templateEngineConfirm;
 
-    public void sendHello(){
-        Destination destination = new Destination().withToAddresses(MY_EMAIL);
-
-        Message message = new Message()
-                .withSubject(new Content("Hello from AWS SES"))
-                .withBody(new Body(new Content("This is a test email sent from AWS SES")));
-
-        SendEmailRequest request = new SendEmailRequest()
-                .withSource(MY_EMAIL)
-                .withDestination(destination)
-                .withMessage(message);
-
-        client.sendEmail(request);
-    }
-
-
-    public void sendEmail(String to, String subject, String body) {
-        Destination destination = new Destination().withToAddresses(to);
-
-        Message message = new Message()
-                .withSubject(new Content(subject))
-                .withBody(new Body(new Content(body)));
-
-        SendEmailRequest request = new SendEmailRequest()
-                .withSource(MY_EMAIL)
-                .withDestination(destination)
-                .withMessage(message);
-
-        client.sendEmail(request);
-    }
-
-    public void sendHtml(String name , String email, String confirmationLink){
-        Destination destination = new Destination().withToAddresses(email);
+    public void emailChangeAppointment(EmailChangeAppointment emailChangeAppointment){
 
         Context context = new Context();
-        context.setVariable("name", name );
-        context.setVariable("domain", "UNIBAGUE");
-        context.setVariable("confirmationLink", confirmationLink);
+        context.setVariable("name", emailChangeAppointment.getName());
+        context.setVariable("appointmentId", emailChangeAppointment.getAppointmentId());
+        context.setVariable("date", emailChangeAppointment.getDate());
+        context.setVariable("time", emailChangeAppointment.getTime());
+        context.setVariable("psychologist", emailChangeAppointment.getPsychologist());
 
-        String htmlBody = this.templateEnginePre.process("Pre-Confirmation", context);
+        Destination destination = new Destination().withToAddresses(emailChangeAppointment.getEmail());
 
-        Message message = new Message()
-                .withSubject(new Content("Confirmación de la reserva - Unidad Psicologica"))
-
-                .withBody(new Body().withHtml(new Content(htmlBody)));
-        System.out.println(htmlBody);
-
-        SendEmailRequest request = new SendEmailRequest()
-                .withSource(MY_EMAIL)
-                .withDestination(destination)
-                .withMessage(message);
-
-        client.sendEmail(request);
-    }
-
-    public void sendConfirmationEmail(String email) {
-        Destination destination = new Destination().withToAddresses(email);
-
-        String htmlBody = this.templateEngineConfirm.process("Confirmation", new Context());
+        String htmlBody = this.templateEnginePre.process("ChangeAppointment", context);
 
         Message message = new Message()
-                .withSubject(new Content("Su Cita Ha Sido CONFIRMADA Exitosamente!"))
+                .withSubject(new Content("IMPORTANTE! Cita Reprogramada en la Unidad Psicologica"))
                 .withBody(new Body().withHtml(new Content(htmlBody)));
 
         SendEmailRequest request = new SendEmailRequest()

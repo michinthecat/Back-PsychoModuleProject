@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        .special-box {
+            border: 2px solid #1a68e3;
+            background-color: #f0f0f0;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body style="background-color: #f0f0f0; font-family: Arial, sans-serif; padding: 20px;">
+<div class="container mt-4" style="max-width: 600px; margin: auto; background-color: white; padding: 20px; border-radius: 15px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-center mb-4 special-title">Hola [[${name}]],</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Detalles de tu nueva cita con Psicologo: [[${psychologist}]]</h3>
+                </div>
+                <div class="special-box">
+                    <p>
+                        <strong>Fecha:</strong> [[${date}]]
+                    </p>
+                    <p>
+                        <strong>Hora:</strong> [[${time}]]
+                    </p>
+                    <p>
+                        <strong>ID de la cita:</strong> [[${appointmentId}]]
+                    </p>
+                </div>
+                <div class="card-body">
+                    <p>
+                        Ten en en cuenta tu ID de Cita para agilizar tu proceso de admision.
+                    </p>
+                    <p>
+                        Si tienes algún problema con este cambio o necesitas más información, por favor no dudes en ponerte en contacto con nosotros.
+                    </p>
+                    <p>
+                        ¡Te esperamos!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

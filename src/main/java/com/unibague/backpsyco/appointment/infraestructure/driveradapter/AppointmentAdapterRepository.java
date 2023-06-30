@@ -3,8 +3,11 @@ package com.unibague.backpsyco.appointment.infraestructure.driveradapter;
 import com.unibague.backpsyco.appointment.domain.model.Appointment;
 import com.unibague.backpsyco.appointment.domain.model.gateway.AppointmentGateway;
 import com.unibague.backpsyco.appointment.infraestructure.mapper.AppointmentMapper;
+import com.unibague.backpsyco.email.model.EmailChangeAppointment;
+import com.unibague.backpsyco.email.service.MailService;
 import com.unibague.backpsyco.state.infraestructure.driveradapter.StateData;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -21,6 +24,9 @@ import java.util.stream.Collectors;
 public class AppointmentAdapterRepository implements AppointmentGateway {
 
     private final AppointmentRepository appointmentRepository;
+
+    //@Autowired
+    private final MailService mailService;
 
     @Override
     public List<Appointment> getAppointmentsByDateAndPsychologistId(Date date, int psychologistId) {
@@ -59,8 +65,20 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
 
         appointmentData.setDate(newDate);
 
+        EmailChangeAppointment emailChangeAppointment = new EmailChangeAppointment();
+        emailChangeAppointment.setName(appointmentData.getPatient().getName());
+        emailChangeAppointment.setPsychologist(appointmentData.getPsychologist().getName());
+        emailChangeAppointment.setDate(newDateTime.toLocalDate().toString());
+        emailChangeAppointment.setTime(newDateTime.toLocalTime().toString());
+        emailChangeAppointment.setAppointmentId(String.valueOf(appointmentId));
+        emailChangeAppointment.setEmail(appointmentData.getPatient().getEmail());
+
+
+        mailService.emailChangeAppointment(emailChangeAppointment);
+
         return AppointmentMapper.fromData(appointmentRepository.save(appointmentData));
     }
+
 
     @Override
     public boolean cancelAppointment(int appointmentId) {

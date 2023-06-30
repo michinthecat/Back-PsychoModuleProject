@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailRequest {
+public class EmailChangeAppointment {
 
-    private Long appointmentId;
     private String name;
+    private String psychologist;
+    private String date;
+    private String time;
+    private String appointmentId;
     private String email;
-    private String confirmationLink;
-
-
 }
