@@ -28,10 +28,13 @@ public class AWSSesConfig {
     @Bean
     public AmazonSimpleEmailService amazonSimpleEmailService() {
         logger.info("awsRegion: {}", awsRegion);
+        System.out.println("awsRegion: " + awsRegion);
 
         logger.info("awsAccessKey: {}", awsAccessKey);
+        System.out.println("awsAccessKey: " + awsAccessKey);
         logger.info("awsSecretKey: {}", awsSecretKey);
-        logger.info("awsRegion: {}", awsRegion);
+        System.out.println("awsSecretKey: " + awsSecretKey);
+
 
         return AmazonSimpleEmailServiceClientBuilder.standard()
                 .withRegion(Regions.fromName(awsRegion))
