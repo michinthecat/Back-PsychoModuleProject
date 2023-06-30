@@ -16,11 +16,7 @@ public class PatientUseCase {
         return patientGateway.updatePatient(patient);
     }
 
-    public String getPatientNotes(int patientId) {
-        return patientGateway.getPatientNotes(patientId);
-    }
-
-    public Patient updatePatientNotes(int patientId, String newNotes) {
+       public Patient updatePatientNotes(int patientId, String newNotes) {
         if (newNotes == null || newNotes.isEmpty()) {
             throw new IllegalArgumentException("Las notas nuevas no pueden ser nulas o vacías");
         }

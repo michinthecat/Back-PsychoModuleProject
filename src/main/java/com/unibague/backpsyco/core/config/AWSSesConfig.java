@@ -1,4 +1,4 @@
-package com.unibague.backpsyco.email.config;
+package com.unibague.backpsyco.core.config;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -12,13 +12,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class AWSSesConfig {
 
-    @Value("${aws.accessKeyId}")
+    @Value("${env.aws.accessKeyId}")
     private String awsAccessKey;
 
-    @Value("${aws.secretKey}")
+    @Value("${env.aws.secretKey}")
     private String awsSecretKey;
 
-    @Value("${aws.region}")
+    @Value("${env.aws.region}")
     private String awsRegion;
 
     @Bean

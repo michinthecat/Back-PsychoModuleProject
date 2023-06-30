@@ -6,8 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/patients")
 @RequiredArgsConstructor
@@ -22,11 +20,6 @@ public class PatientRestController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(patient);
-    }
-
-    @GetMapping("/{id}/notes")
-    public ResponseEntity<String> getPatientNotes(@PathVariable("id") int patientId) {
-        return ResponseEntity.ok(patientUseCase.getPatientNotes(patientId));
     }
 
     @PutMapping

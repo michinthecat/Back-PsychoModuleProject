@@ -11,6 +11,5 @@ public interface PsychologistGateway {
     Psychologist createPsychologist(Psychologist psychologist);
     Psychologist updatePsychologist(Psychologist psychologist);
     Boolean delete(int id);
-    Boolean insertServiceToPsychologist(int psychologistId, int serviceId);
 
 }

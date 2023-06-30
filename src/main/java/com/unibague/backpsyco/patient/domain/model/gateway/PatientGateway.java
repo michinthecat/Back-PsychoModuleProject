@@ -6,8 +6,6 @@ public interface PatientGateway {
 
     Patient getPatientById(int patientId);
     Patient updatePatient(Patient patient);
-    String getPatientNotes(int patientId);
     Patient updatePatientNotes(int patientId, String newNotes);
-
 
 }

@@ -2,7 +2,6 @@ package com.unibague.backpsyco.psychologist.infraestructure.entrypoint;
 
 import com.unibague.backpsyco.psychologist.domain.model.Psychologist;
 import com.unibague.backpsyco.psychologist.domain.usecase.PsychologistUseCase;
-import com.unibague.backpsyco.schedule.domain.model.Schedule;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,17 +50,6 @@ public class PsychologistRestController {
             return ResponseEntity.ok().build();
         } else {
             return ResponseEntity.notFound().build();
-        }
-    }
-
-
-    @PostMapping("/{psychologistId}/services/{serviceId}")
-    public ResponseEntity<String> insertServiceToPsychologist(@PathVariable int psychologistId, @PathVariable int serviceId) {
-        boolean success = psychologistUseCase.insertServiceToPsychologist(psychologistId, serviceId);
-        if (success) {
-            return ResponseEntity.ok("Service inserted to psychologist successfully");
-        } else {
-            return ResponseEntity.badRequest().body("Psychologist or service not found");
         }
     }
 

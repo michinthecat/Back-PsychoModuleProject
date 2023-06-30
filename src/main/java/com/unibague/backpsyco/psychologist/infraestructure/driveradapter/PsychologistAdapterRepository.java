@@ -3,13 +3,10 @@ package com.unibague.backpsyco.psychologist.infraestructure.driveradapter;
 import com.unibague.backpsyco.psychologist.domain.model.Psychologist;
 import com.unibague.backpsyco.psychologist.domain.model.gateway.PsychologistGateway;
 import com.unibague.backpsyco.psychologist.infraestructure.mapper.PsychologistMapper;
-import com.unibague.backpsyco.service.infraestructure.driveradapter.ServiceData;
-import com.unibague.backpsyco.service.infraestructure.driveradapter.ServiceRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -17,7 +14,6 @@ import java.util.stream.Collectors;
 public class PsychologistAdapterRepository implements PsychologistGateway {
 
     private final PsychologistRepository psychologistRepository;
-    private final ServiceRepository serviceRepository;
 
     @Override
     public List<Psychologist> getAll() {
@@ -61,28 +57,5 @@ public class PsychologistAdapterRepository implements PsychologistGateway {
             return false;
         }
     }
-
-    @Override
-    public Boolean insertServiceToPsychologist(int psychologistId, int serviceId) {
-        try {
-            Optional<PsychologistData> psychologistDataOptional = psychologistRepository.findById(psychologistId);
-            Optional<ServiceData> serviceDataOptional = serviceRepository.findById(serviceId);
-
-            if (psychologistDataOptional.isPresent() && serviceDataOptional.isPresent()) {
-                PsychologistData psychologistData = psychologistDataOptional.get();
-                ServiceData serviceData = serviceDataOptional.get();
-
-                psychologistData.getServices().add(serviceData);
-                psychologistRepository.save(psychologistData);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-
 
 }
