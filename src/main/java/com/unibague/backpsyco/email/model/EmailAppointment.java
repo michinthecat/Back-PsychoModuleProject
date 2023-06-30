@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmailChangeAppointment {
+public class EmailAppointment {
 
     private String name;
     private String psychologist;

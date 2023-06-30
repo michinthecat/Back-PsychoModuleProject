@@ -3,11 +3,10 @@ package com.unibague.backpsyco.appointment.infraestructure.driveradapter;
 import com.unibague.backpsyco.appointment.domain.model.Appointment;
 import com.unibague.backpsyco.appointment.domain.model.gateway.AppointmentGateway;
 import com.unibague.backpsyco.appointment.infraestructure.mapper.AppointmentMapper;
-import com.unibague.backpsyco.email.model.EmailChangeAppointment;
+import com.unibague.backpsyco.email.model.EmailAppointment;
 import com.unibague.backpsyco.email.service.MailService;
 import com.unibague.backpsyco.state.infraestructure.driveradapter.StateData;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -18,14 +17,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//Aca se implementa el contrato del gateway
+
 @RequiredArgsConstructor
 @Repository
 public class AppointmentAdapterRepository implements AppointmentGateway {
 
     private final AppointmentRepository appointmentRepository;
-
-    //@Autowired
     private final MailService mailService;
 
     @Override
@@ -42,8 +39,6 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
         System.out.println(appointments);
         return appointments;
     }
-
-
 
     @Override
     public List<Appointment> getAppointmentsByDateRangeAndPsychologistId(Date startDate, Date endDate, int psychologistId) {
@@ -65,16 +60,16 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
 
         appointmentData.setDate(newDate);
 
-        EmailChangeAppointment emailChangeAppointment = new EmailChangeAppointment();
-        emailChangeAppointment.setName(appointmentData.getPatient().getName());
-        emailChangeAppointment.setPsychologist(appointmentData.getPsychologist().getName());
-        emailChangeAppointment.setDate(newDateTime.toLocalDate().toString());
-        emailChangeAppointment.setTime(newDateTime.toLocalTime().toString());
-        emailChangeAppointment.setAppointmentId(String.valueOf(appointmentId));
-        emailChangeAppointment.setEmail(appointmentData.getPatient().getEmail());
+        EmailAppointment emailAppointment = new EmailAppointment();
+        emailAppointment.setName(appointmentData.getPatient().getName());
+        emailAppointment.setPsychologist(appointmentData.getPsychologist().getName() + " " + appointmentData.getPsychologist().getLastName());
+        emailAppointment.setDate(newDateTime.toLocalDate().toString());
+        emailAppointment.setTime(newDateTime.toLocalTime().toString());
+        emailAppointment.setAppointmentId(String.valueOf(appointmentId));
+        emailAppointment.setEmail(appointmentData.getPatient().getEmail());
 
 
-        mailService.emailChangeAppointment(emailChangeAppointment);
+        mailService.emailChangeAppointment(emailAppointment);
 
         return AppointmentMapper.fromData(appointmentRepository.save(appointmentData));
     }
@@ -91,6 +86,16 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
 
             appointmentData.setState(cancelledState);
 
+            EmailAppointment emailAppointment = new EmailAppointment();
+            emailAppointment.setName(appointmentData.getPatient().getName());
+            emailAppointment.setPsychologist(appointmentData.getPsychologist().getName() + " " + appointmentData.getPsychologist().getLastName());
+            emailAppointment.setDate(appointmentData.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().toString());
+            emailAppointment.setTime(appointmentData.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalTime().toString());
+            emailAppointment.setAppointmentId(String.valueOf(appointmentId));
+            emailAppointment.setEmail(appointmentData.getPatient().getEmail());
+
+            mailService.emailCancelationAppointment(emailAppointment);
+
             appointmentRepository.save(appointmentData);
 
             return true;
@@ -98,5 +103,6 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
             return false;
         }
     }
+
 
 }

@@ -2,7 +2,7 @@ package com.unibague.backpsyco.email.service;
 
 import com.amazonaws.services.simpleemail.AmazonSimpleEmailService;
 import com.amazonaws.services.simpleemail.model.*;
-import com.unibague.backpsyco.email.model.EmailChangeAppointment;
+import com.unibague.backpsyco.email.model.EmailAppointment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -22,16 +22,16 @@ public class MailService {
     private TemplateEngine templateEnginePre;
 
 
-    public void emailChangeAppointment(EmailChangeAppointment emailChangeAppointment){
+    public void emailChangeAppointment(EmailAppointment emailAppointment){
 
         Context context = new Context();
-        context.setVariable("name", emailChangeAppointment.getName());
-        context.setVariable("appointmentId", emailChangeAppointment.getAppointmentId());
-        context.setVariable("date", emailChangeAppointment.getDate());
-        context.setVariable("time", emailChangeAppointment.getTime());
-        context.setVariable("psychologist", emailChangeAppointment.getPsychologist());
+        context.setVariable("name", emailAppointment.getName());
+        context.setVariable("appointmentId", emailAppointment.getAppointmentId());
+        context.setVariable("date", emailAppointment.getDate());
+        context.setVariable("time", emailAppointment.getTime());
+        context.setVariable("psychologist", emailAppointment.getPsychologist());
 
-        Destination destination = new Destination().withToAddresses(emailChangeAppointment.getEmail());
+        Destination destination = new Destination().withToAddresses(emailAppointment.getEmail());
 
         String htmlBody = this.templateEnginePre.process("ChangeAppointment", context);
 
@@ -46,5 +46,31 @@ public class MailService {
 
         client.sendEmail(request);
     }
+
+    public void emailCancelationAppointment(EmailAppointment emailCancelationAppointment){
+
+        Context context = new Context();
+        context.setVariable("name", emailCancelationAppointment.getName());
+        context.setVariable("appointmentId", emailCancelationAppointment.getAppointmentId());
+        context.setVariable("date", emailCancelationAppointment.getDate());
+        context.setVariable("time", emailCancelationAppointment.getTime());
+        context.setVariable("psychologist", emailCancelationAppointment.getPsychologist());
+
+        Destination destination = new Destination().withToAddresses(emailCancelationAppointment.getEmail());
+
+        String htmlBody = this.templateEnginePre.process("CancelAppointment", context);
+
+        Message message = new Message()
+                .withSubject(new Content("IMPORTANTE! Cita Cancelada en la Unidad Psicologica"))
+                .withBody(new Body().withHtml(new Content(htmlBody)));
+
+        SendEmailRequest request = new SendEmailRequest()
+                .withSource(MY_EMAIL)
+                .withDestination(destination)
+                .withMessage(message);
+
+        client.sendEmail(request);
+    }
+
 
 }
