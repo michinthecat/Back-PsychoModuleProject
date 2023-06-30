@@ -19,7 +19,7 @@ public class AWSSesConfig {
     @Value("${aws.accessKeyId}")
     private String awsAccessKey;
 
-    @Value("${env.aws.secretKey}")
+    @Value("${aws.secretKey}")
     private String awsSecretKey;
 
     @Value("${aws.region}")
