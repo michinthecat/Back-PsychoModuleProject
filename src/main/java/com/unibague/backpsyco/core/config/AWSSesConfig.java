@@ -8,13 +8,9 @@ import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Configuration
 public class AWSSesConfig {
-
-    private static final Logger logger = LoggerFactory.getLogger(AWSSesConfig.class);
 
     @Value("${aws.accessKeyId}")
     private String awsAccessKey;
@@ -27,15 +23,6 @@ public class AWSSesConfig {
 
     @Bean
     public AmazonSimpleEmailService amazonSimpleEmailService() {
-        logger.info("awsRegion: {}", awsRegion);
-        System.out.println("awsRegion: " + awsRegion);
-
-        logger.info("awsAccessKey: {}", awsAccessKey);
-        System.out.println("awsAccessKey: " + awsAccessKey);
-        logger.info("awsSecretKey: {}", awsSecretKey);
-        System.out.println("awsSecretKey: " + awsSecretKey);
-
-
         return AmazonSimpleEmailServiceClientBuilder.standard()
                 .withRegion(Regions.fromName(awsRegion))
                 .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(awsAccessKey, awsSecretKey)))
