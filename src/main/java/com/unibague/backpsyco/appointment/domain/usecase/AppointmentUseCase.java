@@ -8,16 +8,13 @@ import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-//Aca se implementa el contrato del gateway que se usara en el Controller
+
 @RequiredArgsConstructor
 public class AppointmentUseCase {
 
     private final AppointmentGateway appointmentGateway;
 
     public List<Appointment> getAppointmentsByDateAndPsychologistId(Date date, int psychologistId) {
-        if(date == null){
-            throw new IllegalArgumentException("La fecha no puede ser nula");
-        }
         return appointmentGateway.getAppointmentsByDateAndPsychologistId(date, psychologistId);
     }
 
