@@ -1,5 +1,6 @@
 package com.unibague.backpsyco.appointment.infraestructure.entrypoint;
 
+
 import com.unibague.backpsyco.appointment.domain.model.Appointment;
 import com.unibague.backpsyco.appointment.domain.usecase.AppointmentUseCase;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/appointment")
@@ -25,13 +27,9 @@ public class AppointmentRestController {
     public ResponseEntity<List<Appointment>> getAppointmentsByDateAndPsychologistId(
             @PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") Date date,
             @PathVariable int psychologistId) {
-        try {
-            List<Appointment> appointments = appointmentUseCase.getAppointmentsByDateAndPsychologistId(date, psychologistId);
-            return ResponseEntity.ok(appointments);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+        return ResponseEntity.ok(appointmentUseCase.getAppointmentsByDateAndPsychologistId(date, psychologistId));
     }
+
 
     @GetMapping("/range")
     public ResponseEntity<List<Appointment>> getAppointmentsByDateRangeAndPsychologistId(
@@ -39,21 +37,17 @@ public class AppointmentRestController {
             @RequestParam("end") String endStr,
             @RequestParam("psychologistId") int psychologistId
     ) {
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-            LocalDateTime startDateTime = LocalDateTime.parse(startStr, formatter);
-            LocalDateTime endDateTime = LocalDateTime.parse(endStr, formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime startDateTime = LocalDateTime.parse(startStr, formatter);
+        LocalDateTime endDateTime = LocalDateTime.parse(endStr, formatter);
 
-            Date startDate = Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant());
-            Date endDate = Date.from(endDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date startDate = Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        Date endDate = Date.from(endDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-            List<Appointment> appointments = appointmentUseCase.getAppointmentsByDateRangeAndPsychologistId(startDate, endDate, psychologistId);
-            return appointments != null && !appointments.isEmpty()
-                    ? ResponseEntity.ok(appointments)
-                    : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
+        List<Appointment> appointments = appointmentUseCase.getAppointmentsByDateRangeAndPsychologistId(startDate, endDate, psychologistId);
+        return appointments != null && !appointments.isEmpty()
+                ? ResponseEntity.ok(appointments)
+                : ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     @PutMapping("/{id}/reschedule")
@@ -65,7 +59,7 @@ public class AppointmentRestController {
             Appointment appointment = appointmentUseCase.rescheduleAppointment(appointmentId, newDateTime);
             return ResponseEntity.ok(appointment);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
     }
 
@@ -75,11 +69,12 @@ public class AppointmentRestController {
             if (appointmentUseCase.cancelAppointment(appointmentId)) {
                 return new ResponseEntity<>("Cita eliminada exitosamente", HttpStatus.OK);
             } else {
-                return new ResponseEntity<>("Ocurrió un error al eliminar la cita", HttpStatus.INTERNAL_SERVER_ERROR);
+                return new ResponseEntity<>("Ocurrio un error al eliminar la cita", HttpStatus.INTERNAL_SERVER_ERROR);
             }
-        } catch (Exception e) {
-            return new ResponseEntity<>("No se encontró la cita con el ID: " + appointmentId, HttpStatus.NOT_FOUND);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>("No se encontro el ID de la Cita:" + appointmentId, HttpStatus.NOT_FOUND);
         }
+
     }
 
     @GetMapping("/{id}")
@@ -87,8 +82,13 @@ public class AppointmentRestController {
         try {
             Appointment appointment = appointmentUseCase.getAppointmentById(appointmentId);
             return ResponseEntity.ok(appointment);
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
     }
+
+
+
+
+
 }
