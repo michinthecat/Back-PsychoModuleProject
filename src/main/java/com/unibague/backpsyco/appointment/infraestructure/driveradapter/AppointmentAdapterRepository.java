@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
 @RequiredArgsConstructor
 @Repository
 public class AppointmentAdapterRepository implements AppointmentGateway {
@@ -27,59 +26,73 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
 
     @Override
     public List<Appointment> getAppointmentsByDateAndPsychologistId(Date date, int psychologistId) {
-        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDateTime startOfDay = localDate.atStartOfDay();
-        LocalDateTime endOfDay = localDate.atTime(LocalTime.MAX);
+        try {
+            LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDateTime startOfDay = localDate.atStartOfDay();
+            LocalDateTime endOfDay = localDate.atTime(LocalTime.MAX);
 
-        Date startDate = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
-        Date endDate = Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
+            Date startDate = Date.from(startOfDay.atZone(ZoneId.systemDefault()).toInstant());
+            Date endDate = Date.from(endOfDay.atZone(ZoneId.systemDefault()).toInstant());
 
-        List<Appointment> appointments = getAppointmentsByDateRangeAndPsychologistId(startDate, endDate, psychologistId);
-
-        System.out.println(appointments);
-        return appointments;
+            return getAppointmentsByDateRangeAndPsychologistId(startDate, endDate, psychologistId);
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener las citas por fecha y ID de psicólogo", e);
+        }
     }
 
     @Override
     public List<Appointment> getAppointmentsByDateRangeAndPsychologistId(Date startDate, Date endDate, int psychologistId) {
-        return appointmentRepository.findByDateBetweenAndPsychologistId(startDate, endDate, psychologistId).stream()
-                .map(AppointmentMapper::fromData)
-                .collect(Collectors.toList());
+        try {
+            return appointmentRepository.findByDateBetweenAndPsychologistId(startDate, endDate, psychologistId)
+                    .stream()
+                    .map(AppointmentMapper::fromData)
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener las citas por rango de fechas y ID de psicólogo", e);
+        }
     }
 
     @Override
     public Appointment getAppointmentById(int appointmentId) {
-        return AppointmentMapper.fromData(appointmentRepository.findById(appointmentId).orElseThrow(() -> new IllegalArgumentException("ID Cita No Valido: " + appointmentId)));
+        try {
+            return AppointmentMapper.fromData(appointmentRepository.findById(appointmentId)
+                    .orElseThrow(() -> new IllegalArgumentException("ID de cita no válido: " + appointmentId)));
+        } catch (Exception e) {
+            throw new RuntimeException("Error al obtener la cita por ID", e);
+        }
     }
 
     @Override
     public Appointment rescheduleAppointment(int appointmentId, LocalDateTime newDateTime) {
-        AppointmentData appointmentData = appointmentRepository.findById(appointmentId).orElseThrow(() -> new IllegalArgumentException("Invalid appointment Id:" + appointmentId));
+        try {
+            AppointmentData appointmentData = appointmentRepository.findById(appointmentId)
+                    .orElseThrow(() -> new IllegalArgumentException("ID de cita no válido: " + appointmentId));
 
-        Date newDate = Date.from(newDateTime.atZone(ZoneId.systemDefault()).toInstant());
+            Date newDate = Date.from(newDateTime.atZone(ZoneId.systemDefault()).toInstant());
 
-        appointmentData.setDate(newDate);
+            appointmentData.setDate(newDate);
 
-        EmailAppointment emailAppointment = new EmailAppointment();
-        emailAppointment.setName(appointmentData.getPatient().getName());
-        emailAppointment.setPsychologist(appointmentData.getPsychologist().getName() + " " + appointmentData.getPsychologist().getLastName());
-        emailAppointment.setDate(newDateTime.toLocalDate().toString());
-        emailAppointment.setTime(newDateTime.toLocalTime().toString());
-        emailAppointment.setAppointmentId(String.valueOf(appointmentId));
-        emailAppointment.setEmail(appointmentData.getPatient().getEmail());
+            EmailAppointment emailAppointment = new EmailAppointment();
+            emailAppointment.setName(appointmentData.getPatient().getName());
+            emailAppointment.setPsychologist(appointmentData.getPsychologist().getName() + " " + appointmentData.getPsychologist().getLastName());
+            emailAppointment.setDate(newDateTime.toLocalDate().toString());
+            emailAppointment.setTime(newDateTime.toLocalTime().toString());
+            emailAppointment.setAppointmentId(String.valueOf(appointmentId));
+            emailAppointment.setEmail(appointmentData.getPatient().getEmail());
 
+            mailService.emailChangeAppointment(emailAppointment);
 
-        mailService.emailChangeAppointment(emailAppointment);
-
-        return AppointmentMapper.fromData(appointmentRepository.save(appointmentData));
+            return AppointmentMapper.fromData(appointmentRepository.save(appointmentData));
+        } catch (Exception e) {
+            throw new RuntimeException("Error al reprogramar la cita", e);
+        }
     }
-
 
     @Override
     public boolean cancelAppointment(int appointmentId) {
         try {
             AppointmentData appointmentData = appointmentRepository.findById(appointmentId)
-                    .orElseThrow(() -> new IllegalArgumentException("Invalid appointment Id:" + appointmentId));
+                    .orElseThrow(() -> new IllegalArgumentException("ID de cita no válido: " + appointmentId));
 
             StateData cancelledState = new StateData();
             cancelledState.setId(3);
@@ -100,9 +113,7 @@ public class AppointmentAdapterRepository implements AppointmentGateway {
 
             return true;
         } catch (Exception e) {
-            return false;
+            throw new RuntimeException("Error al cancelar la cita", e);
         }
     }
-
-
 }
